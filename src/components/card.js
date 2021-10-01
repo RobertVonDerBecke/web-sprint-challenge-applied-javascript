@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -6,20 +8,39 @@ const Card = (article) => {
   // The tags used, the hierarchy of elements and their attributes must match the provided markup exactly!
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
-  //
-  // <div class="card">
-  //   <div class="headline">{ headline }</div>
-  //   <div class="author">
-  //     <div class="img-container">
-  //       <img src={ authorPhoto }>
-  //     </div>
-  //     <span>By { authorName }</span>
-  //   </div>
-  // </div>
-  //
+  //destructure 
+  const { headline, authorPhoto, authorName } = article;
+  //create elements for export to dom
+  const div = document.createElement('div');
+    div.classList.add('card');
+    //click functionality
+    document.querySelector('.card');
+    div.addEventListener('click', function(){console.log(`${headline}`)});
+  const divC = document.createElement('div');
+    divC.classList.add('headline');
+    divC.textContent = `${headline}`;
+  const divA = document.createElement('div');
+    divA.classList.add('author');
+  const divImg = document.createElement('div');
+    divImg.classList.add('img-container');
+  const img = document.createElement('img');
+    img.src = `${authorPhoto}`;
+  const span = document.createElement('span');
+    span.textContent = `${authorName}`;
+  //send to dom
+ div.appendChild(divC);
+ div.appendChild(divA);
+ divA.appendChild(divImg);
+ divImg.appendChild(img);
+ divA.appendChild(span);
+
+ return div;
+
+ 
 }
 
 const cardAppender = (selector) => {
+  const temp = document.querySelector(selector);
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -28,6 +49,13 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+  axios.get('http://localhost:5000/api/articles').then(resp => {
+    // debugger;
+    resp.data.articles.forEach(item => {
+      Card(item)
+    })
+    console.log(resp.data.articles)
+  }).catch(err => { console.error(err)})
 }
 
 export { Card, cardAppender }
