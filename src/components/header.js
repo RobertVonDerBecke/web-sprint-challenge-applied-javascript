@@ -32,7 +32,7 @@ const headerAppender = (selector) => {
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
-const temp = Header('title', 'date', 'temp');
+const temp = Header('News Real', '10/01/21', 'Current');
  const header = document.querySelector(selector);
  header.appendChild(temp)
  return header;

@@ -50,17 +50,13 @@ const cardAppender = (selector) => {
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
   axios.get('http://localhost:5000/api/articles').then(resp => {
-    // debugger;
-    // console.log(resp)
     const { articles } = resp.data;
     const temp = Object.entries(articles);
     console.log(temp[0][1][0])
     for(let i = 0; i < 5; i++){
       temp[i][1].forEach((item, index, array) => {
-        // debugger;
         card.appendChild(Card(item))
       });
-      // card.appendChild(Card(temp[i][1][0]))
 
     }
     console.log('--------------')
