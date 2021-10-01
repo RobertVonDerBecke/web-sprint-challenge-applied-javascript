@@ -7,6 +7,15 @@ const Tabs = (topics) => {
   // The tags used, the hierarchy of elements and their attributes must match the provided markup!
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   //
+    const div = document.createElement('div');
+    div.classList.add('topics');
+    topics.forEach(e => {
+      const temp = document.createElement('div');
+      temp.classList.add('tab');
+      temp.textContent = `${e}`;
+      div.appendChild(temp);
+    });
+    return div;
   // <div class="topics">
   //   <div class="tab">javascript</div>
   //   <div class="tab">bootstrap</div>
@@ -23,6 +32,7 @@ const tabsAppender = (selector) => {
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
+  
 }
 
 export { Tabs, tabsAppender }
