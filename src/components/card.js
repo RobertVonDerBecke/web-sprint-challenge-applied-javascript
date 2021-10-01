@@ -40,7 +40,7 @@ const Card = (article) => {
 }
 
 const cardAppender = (selector) => {
-  const temp = document.querySelector(selector);
+  const card = document.querySelector(selector);
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -51,11 +51,21 @@ const cardAppender = (selector) => {
   //
   axios.get('http://localhost:5000/api/articles').then(resp => {
     // debugger;
-    resp.data.articles.forEach(item => {
-      Card(item)
-    })
-    console.log(resp.data.articles)
-  }).catch(err => { console.error(err)})
+    // console.log(resp)
+    const { articles } = resp.data;
+    const temp = Object.entries(articles);
+    console.log(temp[0][1][0])
+    for(let i = 0; i < 5; i++){
+      temp[i][1].forEach((item, index, array) => {
+        // debugger;
+        card.appendChild(Card(item))
+      });
+      // card.appendChild(Card(temp[i][1][0]))
+
+    }
+    console.log('--------------')
+    console.log(temp)
+    }).catch(err => { console.error(err)})
 }
 
 export { Card, cardAppender }
